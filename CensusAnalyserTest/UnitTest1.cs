@@ -155,6 +155,16 @@ namespace CensusAnalyserTest
         }
 
         [Test]
+        public void givenUSCensusData_ifHasCorrectNumberOfRecord_ShouldReturnTrue()
+        {
+            USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
+            List<USCensusAnalyserDAO> list=uSCensusAnalyser.loadStateCensusData(USCensusData);
+            Assert.AreEqual(51,list.Count);
+
+
+        }
+
+        [Test]
         public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
         
         
