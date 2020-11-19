@@ -25,7 +25,7 @@ namespace CensusAnalyserTest
         }
 
         [Test]
-        public void givenWrongIndiaStateCode_InputFile_ShouldThrowWxception() {
+        public void givenWrongIndiaCensusCode_InputFile_ShouldThrowWxception() {
             try {
                 StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
                 List<StateCensusDataDTO> list = stateCensusAnalyser.loadStateCensusData(IndiaCensusDataWithWrongFile);
@@ -61,7 +61,55 @@ namespace CensusAnalyserTest
             catch (CensusAnalyserException e) {
                 Assert.AreEqual(CensusAnalyserException.ExceptionType.INVAILD_HEADER, e.type);
             }
+        }
 
+        [Test]
+        public void givenIndiaStateCodecsvFile_ifHasCorrectNumberOFRecord_ShouldReturnTrue() {
+            IndiaStateCodeCensusAnalyser indiaStateCodeCensusAnalyser = new IndiaStateCodeCensusAnalyser();
+            List<IndiaStateCodeDTO> list = indiaStateCodeCensusAnalyser.loadingStateCensusCSV(IndiaStateCodeCensusFilePath);
+            Assert.AreEqual(37, list.Count);
+        }
+
+        [Test]
+        public void givenWrongIndiaStateCode_InputFile_ShouldThrowWxception()
+        {
+            try
+            {
+                StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+                List<StateCensusDataDTO> list = stateCensusAnalyser.loadStateCensusData(IndiaCensusAnalyserWithWrong_File);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE, e.type);
+            }
+        }
+
+        [Test]
+        public void givenIndiaStateCodeCSVFile_withoutHeader_ShouldThrowWxception() {
+
+            try
+            {
+                CSVHeaderCheck csvHeaderCheck = new CSVHeaderCheck();
+                csvHeaderCheck.loadFile(IndiaStateCodeWithDelimiter);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVAILD_HEADER, e.type);
+            }
+        }
+
+
+        [Test]
+        public void givenIndiaSateCodeCsvFile_withDilimiterIssue_ShouldException() {
+            try
+            {
+                Delimiter delimiter = new Delimiter();
+                delimiter.loadData(IndiaStateCodeWithDelimiter);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_DILIMINATOR, e.type);
+            }
 
         }
     }
