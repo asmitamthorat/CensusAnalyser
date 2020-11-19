@@ -182,6 +182,15 @@ namespace CensusAnalyserTest
         }
 
         [Test]
+        public void givenUSCensusCSV_WhenSortedBasedOnArea_ShouldRetrunSortedList() {
+
+            USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
+            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByArea(USCensusData);
+            Assert.AreEqual("Alaska", list[list.Count - 1].State);
+
+        }
+
+        [Test]
         public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
         
         

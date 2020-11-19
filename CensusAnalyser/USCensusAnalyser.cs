@@ -43,8 +43,12 @@ namespace CensusAnalyser
             return list;
         }
 
-
-
-
+        public List<USCensusAnalyserDAO> sortByArea(string path)
+        {
+            List<USCensusAnalyserDAO> list = loadStateCensusData(path);
+            list.Sort(delegate (USCensusAnalyserDAO object1, USCensusAnalyserDAO object2) { return object1.LandArea.CompareTo(object2.LandArea); });
+            Console.WriteLine(list[0].State);
+            return list;
+        }
     }
 }
