@@ -165,6 +165,16 @@ namespace CensusAnalyserTest
         }
 
         [Test]
+
+        public void givenUSCensusCSV_WhenSortedBasedONPopulation_ShouldRetrunSortedList() {
+            USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
+            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByPopulation(USCensusData);
+            Assert.AreEqual("California", list[list.Count - 1].State);
+
+
+        }
+
+        [Test]
         public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
         
         

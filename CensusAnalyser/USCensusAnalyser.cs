@@ -23,8 +23,28 @@ namespace CensusAnalyser
                     .GetRecords<USCensusAnalyserDAO>().ToList();
             }
             return IndiaStateCodeCsvList;
-
-
         }
+
+
+        public List<USCensusAnalyserDAO> sortByPopulation(string path) {
+            List<USCensusAnalyserDAO> list = loadStateCensusData(path);
+            list.Sort(delegate (USCensusAnalyserDAO object1, USCensusAnalyserDAO object2) { return object1.Population.CompareTo(object2.Population); });
+            Console.WriteLine(list[0].State);
+            return list;
+        }
+
+
+
+        public List<USCensusAnalyserDAO> sortByPopulationDensity(string path)
+        {
+            List<USCensusAnalyserDAO> list = loadStateCensusData(path);
+            list.Sort(delegate (USCensusAnalyserDAO object1, USCensusAnalyserDAO object2) { return object1.PopulationDensity.CompareTo(object2.PopulationDensity); });
+            Console.WriteLine(list[0].State);
+            return list;
+        }
+
+
+
+
     }
 }
