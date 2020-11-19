@@ -20,7 +20,7 @@ namespace CensusAnalyserTest
         public void voidgivenStateCensusData_ifHasCorrectNumberOfRecord_ShouldReturnTrue()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-           List<StateCensusDataDTO> list= stateCensusAnalyser.loadStateCensusData(IndiaCensusDataFilePath1);
+            List<StateCensusDataDTO> list = stateCensusAnalyser.loadStateCensusData(IndiaCensusDataFilePath1);
             Assert.AreEqual(29, list.Count);
         }
 
@@ -33,7 +33,7 @@ namespace CensusAnalyserTest
             catch (CensusAnalyserException e) {
 
                 Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE, e.type);
-            
+
             }
         }
 
@@ -110,6 +110,15 @@ namespace CensusAnalyserTest
             {
                 Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_DILIMINATOR, e.type);
             }
+
+        }
+
+
+        [Test]
+        public void givenStateCensusCsv_sortOntheBasisOfStateName_ShouldReturnSortedList(){
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            List<StateCensusDataDTO> list= stateCensusAnalyser.sortByName(IndiaCensusDataFilePath1);
+            Assert.AreEqual("Andhra Pradesh", list[0].State);
 
         }
     }

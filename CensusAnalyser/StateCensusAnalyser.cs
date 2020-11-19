@@ -27,5 +27,13 @@ namespace CensusAnalyser
             return Dictionary[matchKey];
 
         }
+
+        public List<StateCensusDataDTO> sortByName(string path) {
+            List<StateCensusDataDTO> list = loadStateCensusData(path);
+            list.Sort(delegate (StateCensusDataDTO object1, StateCensusDataDTO object2) { return object1.State.CompareTo(object2.State); });
+            Console.WriteLine(list[0].State);
+            return list;
+
+        }
     }
 }
