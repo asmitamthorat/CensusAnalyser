@@ -121,5 +121,14 @@ namespace CensusAnalyserTest
             Assert.AreEqual("Andhra Pradesh", list[0].State);
 
         }
+
+        [Test]
+        public void givenStateCodeCsvFile_whenSorted_ShouldRetrunSortedList()
+        {
+            IndiaStateCodeCensusAnalyser indiaStateCodeCensusAnalyser = new IndiaStateCodeCensusAnalyser();
+            List<IndiaStateCodeDTO> list = indiaStateCodeCensusAnalyser.sortingByStateCode(IndiaStateCodeCensusFilePath);
+            Assert.AreEqual("AD", list[0].StateCode);
+
+        }
     }
 }
