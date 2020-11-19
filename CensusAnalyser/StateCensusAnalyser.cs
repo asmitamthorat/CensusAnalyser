@@ -44,5 +44,13 @@ namespace CensusAnalyser
             return list;
 
         }
+
+
+        public List<StateCensusDataDAO> sortByArea(string path) {
+
+            List<StateCensusDataDAO> list = loadStateCensusData(path);
+            list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.AreaInSqKm.CompareTo(object2.AreaInSqKm); });
+            return list;
+        }
     }
 }

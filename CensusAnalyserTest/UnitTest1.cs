@@ -148,6 +148,13 @@ namespace CensusAnalyserTest
         }
 
         [Test]
+        public void givenIndiaStateCodeCSVFile_WhenSortedWithsStateArea_ShoudlReturnSortedList() {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            List<StateCensusDataDAO> list = stateCensusAnalyser.sortByArea(IndiaCensusDataFilePath1);
+            Assert.AreEqual("Tripura", list[0].State);
+        }
+
+        [Test]
         public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
         
         
