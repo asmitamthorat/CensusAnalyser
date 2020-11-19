@@ -23,5 +23,46 @@ namespace CensusAnalyserTest
            List<StateCensusDataDTO> list= stateCensusAnalyser.loadStateCensusData(IndiaCensusDataFilePath1);
             Assert.AreEqual(29, list.Count);
         }
+
+        [Test]
+        public void givenWrongIndiaStateCode_InputFile_ShouldThrowWxception() {
+            try {
+                StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+                List<StateCensusDataDTO> list = stateCensusAnalyser.loadStateCensusData(IndiaCensusDataWithWrongFile);
+            }
+            catch (CensusAnalyserException e) {
+
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE, e.type);
+            
+            }
+        }
+
+        [Test]
+        public void givenStateCensusData_ifhasInvalidDelimiter_ShouldThrowException()
+        {
+            try {
+                Delimiter delimiter = new Delimiter();
+                delimiter.loadData(IndiaCensusDataWithDelimiter);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_DILIMINATOR, e.type);
+            }
+
+        }
+
+        [Test]
+        public void givenStateCensusAnalyser_WithoutHeader_ShouldThrowException() {
+            try
+            {
+                CSVHeaderCheck csvHeaderCheck = new CSVHeaderCheck();
+                csvHeaderCheck.loadFile(IndiaStateCensusWithoutHeader);
+            }
+            catch (CensusAnalyserException e) {
+                Assert.AreEqual(CensusAnalyserException.ExceptionType.INVAILD_HEADER, e.type);
+            }
+
+
+        }
     }
 }
