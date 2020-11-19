@@ -130,5 +130,27 @@ namespace CensusAnalyserTest
             Assert.AreEqual("AD", list[0].StateCode);
 
         }
+
+
+        [Test]
+        public void givenStateAnalyserCSVFile_whenSortedwithPopulation_ShouldRetrunSortedList() {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            List<StateCensusDataDAO> list=stateCensusAnalyser.sortByPopulation(IndiaCensusDataFilePath1);
+            Assert.AreEqual("Uttar Pradesh", list[list.Count-1].State);
+        }
+
+        [Test]
+        public void givenStateAnalyserCSVFile_whenSortedWithPopulationDensity_ShouldReturnSortedList() {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            List<StateCensusDataDAO> list = stateCensusAnalyser.sortByPopulationDensity(IndiaCensusDataFilePath1);
+            Assert.AreEqual("West Bengal", list[0].State);
+
+        }
+
+        [Test]
+        public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
+        
+        
+        }
     }
 }
