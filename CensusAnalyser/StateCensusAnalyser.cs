@@ -8,9 +8,10 @@ namespace CensusAnalyser
 {
     public class StateCensusAnalyser
     {
-        List<StateCensusDataDAO> StateCensusAnalyserlist = new List<StateCensusDataDAO>();
-        public Dictionary<String, List<StateCensusDataDAO>> Dictionary = new Dictionary<string, List<StateCensusDataDAO>>();
+      //  List<StateCensusDataDAO> StateCensusAnalyserlist = new List<StateCensusDataDAO>();
+      //  public Dictionary<String, List<StateCensusDataDAO>> Dictionary = new Dictionary<string, List<StateCensusDataDAO>>();
         public List<StateCensusDataDAO> loadStateCensusData(string path) {
+            CSVFactory csvFactory = new CSVFactory();
             FileInfo csvFile = new FileInfo(path);
             String FileExtension = csvFile.Extension;
             if (FileExtension != ".csv")
@@ -18,13 +19,14 @@ namespace CensusAnalyser
                 throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INVALID_FILE, "provided file is not a csv file");
             }
 
-                var file = new System.IO.StreamReader(path);
-            StateCensusAnalyserlist = new CsvHelper.CsvReader(file, System.Globalization.CultureInfo.InvariantCulture)
-                    .GetRecords<StateCensusDataDAO>().ToList();
+              //  var file = new System.IO.StreamReader(path);
+            // StateCensusAnalyserlist = new CsvHelper.CsvReader(file, System.Globalization.CultureInfo.InvariantCulture)
+            //       .GetRecords<StateCensusDataDAO>().ToList();
 
-            Dictionary.Add("StateCensusAnalyzer", StateCensusAnalyserlist);
-            var matchKey = "StateCensusAnalyzer";
-            return Dictionary[matchKey];
+            //Dictionary.Add("StateCensusAnalyzer", StateCensusAnalyserlist);
+            //var matchKey = "StateCensusAnalyzer";
+            csvFactory.CSVBuilder(path, "StateCensusAnalyser");
+            return csvFactory.mapStateCensusAnalyser["StateCensusAnalyser"];
 
         }
 
