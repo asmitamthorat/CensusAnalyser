@@ -170,8 +170,15 @@ namespace CensusAnalyserTest
             USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
             List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByPopulation(USCensusData);
             Assert.AreEqual("California", list[list.Count - 1].State);
+        }
 
+        [Test]
 
+        public void givenUSCensusCSV_WhenSortedBasedONPopulationDensity_ShouldRetrunSortedList()
+        {
+            USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
+            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByPopulationDensity(USCensusData);
+            Assert.AreEqual("District of Columbia", list[list.Count - 1].State);
         }
 
         [Test]
