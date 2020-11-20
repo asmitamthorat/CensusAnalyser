@@ -1,4 +1,5 @@
 using CensusAnalyser;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -117,8 +118,9 @@ namespace CensusAnalyserTest
         [Test]
         public void givenStateCensusCsv_sortOntheBasisOfStateName_ShouldReturnSortedList(){
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            List<StateCensusDataDAO> list= stateCensusAnalyser.sortByName(IndiaCensusDataFilePath1);
-            Assert.AreEqual("Andhra Pradesh", list[0].State);
+            String StateCensusData= stateCensusAnalyser.sortByName(IndiaCensusDataFilePath1);
+            StateCensusDataDTO[] census = JsonConvert.DeserializeObject<StateCensusDataDTO[]>(StateCensusData);
+            Assert.AreEqual("Andhra Pradesh", census[0].State);
 
         }
 
@@ -135,23 +137,26 @@ namespace CensusAnalyserTest
         [Test]
         public void givenStateAnalyserCSVFile_whenSortedwithPopulation_ShouldRetrunSortedList() {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            List<StateCensusDataDAO> list=stateCensusAnalyser.sortByPopulation(IndiaCensusDataFilePath1);
-            Assert.AreEqual("Uttar Pradesh", list[list.Count-1].State);
+            string StateCensusData = stateCensusAnalyser.sortByPopulation(IndiaCensusDataFilePath1);
+            StateCensusDataDTO[] census = JsonConvert.DeserializeObject<StateCensusDataDTO[]>(StateCensusData);
+            Assert.AreEqual("Uttar Pradesh", census[census.Length-1].State);
         }
 
         [Test]
         public void givenStateAnalyserCSVFile_whenSortedWithPopulationDensity_ShouldReturnSortedList() {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            List<StateCensusDataDAO> list = stateCensusAnalyser.sortByPopulationDensity(IndiaCensusDataFilePath1);
-            Assert.AreEqual("West Bengal", list[0].State);
+            string StateCensusData = stateCensusAnalyser.sortByPopulationDensity(IndiaCensusDataFilePath1);
+            StateCensusDataDTO[] census = JsonConvert.DeserializeObject<StateCensusDataDTO[]>(StateCensusData);
+            Assert.AreEqual("West Bengal", census[0].State);
 
         }
 
         [Test]
         public void givenIndiaStateCodeCSVFile_WhenSortedWithsStateArea_ShoudlReturnSortedList() {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            List<StateCensusDataDAO> list = stateCensusAnalyser.sortByArea(IndiaCensusDataFilePath1);
-            Assert.AreEqual("Tripura", list[0].State);
+            string StateCensusData = stateCensusAnalyser.sortByArea(IndiaCensusDataFilePath1);
+            StateCensusDataDTO[] census = JsonConvert.DeserializeObject<StateCensusDataDTO[]>(StateCensusData);
+            Assert.AreEqual("Tripura", census[0].State);
         }
 
         [Test]
@@ -168,8 +173,9 @@ namespace CensusAnalyserTest
 
         public void givenUSCensusCSV_WhenSortedBasedONPopulation_ShouldRetrunSortedList() {
             USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
-            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByPopulation(USCensusData);
-            Assert.AreEqual("California", list[list.Count - 1].State);
+            string usCensusData = uSCensusAnalyser.sortByPopulation(USCensusData);
+            USCensusAnalyserDTO[] census = JsonConvert.DeserializeObject<USCensusAnalyserDTO[]>(usCensusData);
+            Assert.AreEqual("California", census[census.Length - 1].State);
         }
 
         [Test]
@@ -177,16 +183,18 @@ namespace CensusAnalyserTest
         public void givenUSCensusCSV_WhenSortedBasedONPopulationDensity_ShouldRetrunSortedList()
         {
             USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
-            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByPopulationDensity(USCensusData);
-            Assert.AreEqual("District of Columbia", list[list.Count - 1].State);
+            string usCensusData = uSCensusAnalyser.sortByPopulationDensity(USCensusData);
+            USCensusAnalyserDTO[] census = JsonConvert.DeserializeObject<USCensusAnalyserDTO[]>(usCensusData);
+            Assert.AreEqual("District of Columbia", census[census.Length - 1].State);
         }
 
         [Test]
         public void givenUSCensusCSV_WhenSortedBasedOnArea_ShouldRetrunSortedList() {
 
             USCensusAnalyser uSCensusAnalyser = new USCensusAnalyser();
-            List<USCensusAnalyserDAO> list = uSCensusAnalyser.sortByArea(USCensusData);
-            Assert.AreEqual("Alaska", list[list.Count - 1].State);
+            string usCensusData  = uSCensusAnalyser.sortByArea(USCensusData);
+            USCensusAnalyserDTO[] census = JsonConvert.DeserializeObject<USCensusAnalyserDTO[]>(usCensusData);
+            Assert.AreEqual("Alaska", census[census.Length - 1].State);
 
         }
 

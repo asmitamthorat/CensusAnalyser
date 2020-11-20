@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+
 
 namespace CensusAnalyser
 {
@@ -12,41 +13,54 @@ namespace CensusAnalyser
         public List<StateCensusDataDAO> loadStateCensusData(string path) {
             CSVFactory csvFactory = new CSVFactory();
             
-
-            //            CSVFactory csvFactory = new CSVFactory();
             LoadCSVFile(path);
             csvFactory.CSVBuilder(path, "StateCensusAnalyser");
+
+
+            List<StateCensusDataDAO> list = csvFactory.mapStateCensusAnalyser["StateCensusAnalyser"];
+           string json= JsonConvert.SerializeObject(list);
+           
+            Console.WriteLine(json);
+          
+            StateCensusDataDTO[] census = JsonConvert.DeserializeObject<StateCensusDataDTO[]>(json);
+            Console.WriteLine("--------------");
+            Console.WriteLine(census[0].State);
+
+            
             return csvFactory.mapStateCensusAnalyser["StateCensusAnalyser"];
 
         }
 
-        public List<StateCensusDataDAO> sortByName(string path) {
+        public string sortByName(string path) {
             List<StateCensusDataDAO> list = loadStateCensusData(path);
             list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.State.CompareTo(object2.State); });
-            return list;
+            string json = JsonConvert.SerializeObject(list);
+            return json;
 
         }
 
-        public List<StateCensusDataDAO> sortByPopulation(string path) {
+        public string sortByPopulation(string path) {
             List<StateCensusDataDAO> list = loadStateCensusData(path);
             list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.Population.CompareTo(object2.Population); });
-            return list;
+            string json = JsonConvert.SerializeObject(list);
+            return json;
         }
 
 
-        public List<StateCensusDataDAO> sortByPopulationDensity(string path) {
+        public string sortByPopulationDensity(string path) {
             List<StateCensusDataDAO> list = loadStateCensusData(path);
             list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.DensityPerSqKm.CompareTo(object2.DensityPerSqKm); });
-            return list;
+            string json = JsonConvert.SerializeObject(list);
+            return json;
 
         }
 
 
-        public List<StateCensusDataDAO> sortByArea(string path) {
-
+        public string sortByArea(string path) {
             List<StateCensusDataDAO> list = loadStateCensusData(path);
             list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.AreaInSqKm.CompareTo(object2.AreaInSqKm); });
-            return list;
+            string json = JsonConvert.SerializeObject(list);
+            return json;
         }
     }
 }

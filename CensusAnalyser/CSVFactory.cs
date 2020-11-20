@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace CensusAnalyser
 {
     public class CSVFactory
     {
-
         public  List<USCensusAnalyserDAO> USCensusAnalyzerList = new List<USCensusAnalyserDAO>();
         public Dictionary<string, List<USCensusAnalyserDAO>> map_USCensusAnalyzer = new Dictionary<string, List<USCensusAnalyserDAO>>();
         public List<IndiaStateCodeDAO> IndiaStateCodeCsvList = new List<IndiaStateCodeDAO>();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CensusAnalyser
 {
@@ -12,11 +10,8 @@ namespace CensusAnalyser
         }
 
         public readonly ExceptionType type;
-
         public CensusAnalyserException(ExceptionType type, string message) : base(message) {
             this.type = type;
-        
-        
         }
     }
 }

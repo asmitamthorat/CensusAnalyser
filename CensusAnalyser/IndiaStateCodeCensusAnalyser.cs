@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CensusAnalyser
 {
     public class IndiaStateCodeCensusAnalyser:Adapter
     {
-       
         public List<IndiaStateCodeDAO> loadingStateCensusCSV(string path)
         {
-
             CSVFactory csvFactory = new CSVFactory();
             LoadCSVFile(path);
             csvFactory.CSVBuilder(path, "IndiaStateCodeCensusAnalyser");
