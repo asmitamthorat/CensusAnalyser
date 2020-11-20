@@ -5,18 +5,16 @@ using System.Text;
 
 namespace CensusAnalyser
 {
-    public class IndiaStateCodeCensusAnalyser
+    public class IndiaStateCodeCensusAnalyser:Adapter
     {
-        static private List<IndiaStateCodeDAO> IndiaStateCodeCsvList = new List<IndiaStateCodeDAO>();
+       
         public List<IndiaStateCodeDAO> loadingStateCensusCSV(string path)
         {
 
-            using (var file = new System.IO.StreamReader(path))
-            {
-                IndiaStateCodeCsvList = new CsvHelper.CsvReader(file, System.Globalization.CultureInfo.InvariantCulture)
-                    .GetRecords<IndiaStateCodeDAO>().ToList();
-            }
-            return IndiaStateCodeCsvList;
+            CSVFactory csvFactory = new CSVFactory();
+            LoadCSVFile(path);
+            csvFactory.CSVBuilder(path, "IndiaStateCodeCensusAnalyser");
+            return csvFactory.map_IndiaStateCodeCsv["IndiaStateCodeCensusAnalyser"];
         }
 
         public List<IndiaStateCodeDAO> sortingByStateCode(string path)

@@ -6,18 +6,15 @@ using System.Text;
 
 namespace CensusAnalyser
 {
-    public class StateCensusAnalyser
+    public class StateCensusAnalyser:Adapter
     {
      
         public List<StateCensusDataDAO> loadStateCensusData(string path) {
             CSVFactory csvFactory = new CSVFactory();
-            FileInfo csvFile = new FileInfo(path);
-            String FileExtension = csvFile.Extension;
-            if (FileExtension != ".csv")
-            {
-                throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INVALID_FILE, "provided file is not a csv file");
-            }
+            
 
+            //            CSVFactory csvFactory = new CSVFactory();
+            LoadCSVFile(path);
             csvFactory.CSVBuilder(path, "StateCensusAnalyser");
             return csvFactory.mapStateCensusAnalyser["StateCensusAnalyser"];
 
@@ -26,7 +23,6 @@ namespace CensusAnalyser
         public List<StateCensusDataDAO> sortByName(string path) {
             List<StateCensusDataDAO> list = loadStateCensusData(path);
             list.Sort(delegate (StateCensusDataDAO object1, StateCensusDataDAO object2) { return object1.State.CompareTo(object2.State); });
-            Console.WriteLine(list[0].State);
             return list;
 
         }

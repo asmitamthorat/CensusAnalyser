@@ -190,10 +190,6 @@ namespace CensusAnalyserTest
 
         }
 
-        [Test]
-        public void givenUSCensusData_ifHasCorrectNumberOfRecord() { 
         
-        
-        }
     }
 }
